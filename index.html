@@ -24,13 +24,35 @@
       height: 40px;
       margin-right: 15px;
     }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2em;
+      gap: 2em;
+    }
     main {
-      max-width: 800px;
+      flex: 1 1 550px;
       padding: 2em;
       background: white;
       border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.07);
       border: 3px solid #ffa726;
+      box-shadow: 0 0 15px rgba(0,0,0,0.07);
+      max-width: 800px;
+    }
+    aside {
+      flex: 0 0 300px;
+      background: #fff8ef;
+      border: 2px solid #ffa726;
+      border-radius: 8px;
+      padding: 1em;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    }
+    aside h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #d35400;
     }
     label {
       display: block;
@@ -68,6 +90,9 @@
       border-radius: 4px;
       margin: 0.5em 0;
     }
+    ul {
+      padding-left: 1.2em;
+    }
   </style>
 </head>
 <body>
@@ -76,8 +101,8 @@
     <h1>MangoRP Straffen</h1>
   </header>
 
-  <div style="display: flex; flex-wrap: wrap; gap: 2em; justify-content: center; align-items: flex-start; padding: 2em;">
-    <main style="flex: 1 1 500px;">
+  <div class="container">
+    <main>
       <label for="artikel">Kies artikel:</label>
       <select id="artikel"></select>
 
@@ -106,32 +131,35 @@
       </div>
     </main>
 
-    <aside style="flex: 1 1 300px; background: #fff8ef; border: 2px solid #ffa726; border-radius: 8px; padding: 1em; box-shadow: 0 0 8px rgba(0,0,0,0.05);">
-      <h2 style="margin-top: 0;">📚 Extra informatie</h2>
+    <aside>
+      <h2>📘 Missende artikelen</h2>
 
       <h3 style="margin-bottom: 0.3em;">Artikel O.8 – Overmeesteren</h3>
-      <p>Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn. De gehostagede telt niet mee.</p>
-      <ul style="padding-left: 1em;">
-        <li>1 vs 2 → ❌ niet genoeg</li>
-        <li>1 vs 3 → ✅ overmeesteren mag</li>
+      <p>
+        Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn dan jouw partij.
+      </p>
+      <ul>
+        <li>1 vs 2 = ❌ te weinig</li>
+        <li>1 vs 3 = ✅ overmeestering toegestaan</li>
       </ul>
-      <p>Alle personen moeten zichtbaar zijn. “We hadden 5 man verderop” is <strong>ongeldig</strong>. Deze regel geldt voor overheid én criminelen.</p>
+      <p>De gehostagede telt niet mee. Alle personen moeten zichtbaar zijn. Verborgen mannetjes tellen niet. Geldt voor overheid én criminelen.</p>
 
       <h3 style="margin-bottom: 0.3em;">Artikel O.12 – Wraakacties</h3>
       <p>
-        Je mag wraak nemen op iemand die jou of een vriend onrecht heeft aangedaan, <strong>binnen 24 uur</strong> en <em>alleen in RP</em>. Alleen de dader mag worden aangepakt.
+        Binnen 24 uur mag je wraak nemen op een specifieke dader die jou of een vriend iets aandeed. Alleen in RP.
       </p>
-      <ul style="padding-left: 1em;">
-        <li>Geen doodschot als iemand niet komt opdagen</li>
-        <li>Wel vastbinden/meenemen om info te krijgen</li>
-        <li><strong>Zeg altijd waarom vóór het schieten</strong></li>
+      <ul>
+        <li>Alleen die persoon aanpakken</li>
+        <li>Je mag anderen vasthouden of ondervragen</li>
+        <li>Niet zomaar neerschieten</li>
+        <li><strong>Altijd een reden geven vóór actie</strong></li>
       </ul>
     </aside>
   </div>
 
   <script>
-    // ➤ Plak hier je straffen terug
-    const straffen = [ { id: 1, artikel: 'Artikel 1.1  VDM', keer: 1, uren: 2, gevolg: 'warn' },
+    // ➤ Hier kun jij je straffen plakken
+    const straffen = [ { id: 1, artikel: 'Artikel 1.1 VDM', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 1, artikel: 'Artikel 1.1 VDM', keer: 2, uren: 12, gevolg: '' },
   { id: 2, artikel: 'Artikel 1.2 RDM', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 2, artikel: 'Artikel 1.2 RDM', keer: 2, uren: 12, gevolg: '' },
@@ -426,7 +454,7 @@
 
       if (match) {
         const p = document.createElement('p');
-        p.innerHTML = `<strong>${match.artikel}</strong> – ${match.uren} uur` + 
+        p.innerHTML = `<strong>${match.artikel}</strong> – ${match.uren} uur` +
           (match.gevolg ? ` – ${match.gevolg}` : '');
         lijstDiv.appendChild(p);
 
