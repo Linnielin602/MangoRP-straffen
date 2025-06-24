@@ -59,6 +59,12 @@
       box-shadow: 0 0 8px rgba(0,0,0,0.07);
     }
 
+    aside h2 {
+      margin-top: 0;
+      font-size: 1.1em;
+      color: #d35400;
+    }
+
     label {
       display: block;
       margin: 1em 0 0.25em;
@@ -101,13 +107,19 @@
     }
 
     canvas {
+      width: 100%;
       max-width: 700px;
+      height: 350px;
       margin: 3em auto 2em auto;
       display: block;
       background-color: rgba(255,255,255,0.95);
       border-radius: 10px;
       padding: 1em;
       box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    ul {
+      padding-left: 1.2em;
     }
   </style>
 </head>
@@ -149,7 +161,22 @@
 
     <aside>
       <h2>📘 Missende artikelen</h2>
-      <!-- Artikelen info -->
+
+      <h3>Artikel O.8 – Overmeesteren</h3>
+      <p>Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn dan jouw partij.</p>
+      <ul>
+        <li>1 vs 2 = ❌ te weinig</li>
+        <li>1 vs 3 = ✅ toegestaan</li>
+      </ul>
+      <p>De gehostagede telt niet mee. Iedereen moet zichtbaar zijn. Verstopt telt niet.</p>
+
+      <h3>Artikel O.12 – Wraakacties</h3>
+      <p>Wraak binnen 24 uur mag alleen in RP. Enkel op de dader gericht.</p>
+      <ul>
+        <li>Anderen vasthouden mag</li>
+        <li>Niet zomaar neerschieten</li>
+        <li><strong>Reden moet worden uitgesproken vóór actie</strong></li>
+      </ul>
     </aside>
   </div>
 
@@ -443,9 +470,11 @@
     let alleGevolgen = [];
     let samenvattingTekst = [];
 
-    const tellingen = {}; // voor de grafiek
+    const tellingen = JSON.parse(localStorage.getItem('tellingData')) || {};
     const ctx = document.getElementById('grafiek').getContext('2d');
     let chart;
+
+    window.addEventListener('DOMContentLoaded', updateGrafiek);
 
     function voegToe() {
       const gekozenArtikel = document.getElementById('artikel').value;
@@ -468,8 +497,8 @@
         updateSamenvatting();
         updateTotaal();
 
-        // telling bijhouden
         tellingen[match.artikel] = (tellingen[match.artikel] || 0) + 1;
+        localStorage.setItem('tellingData', JSON.stringify(tellingen));
         updateGrafiek();
       } else {
         alert('Geen straf gevonden voor deze combinatie.');
@@ -482,7 +511,7 @@
       const multiplier = checkbox.checked ? 2 : 1;
       const aangepasteUren = totaalUren * multiplier;
 
-      totaalDiv.innerHTML = `<hr><strong>Totaal: ${aangepasteUren} uur</strong><br>` +
+            totaalDiv.innerHTML = `<hr><strong>Totaal: ${aangepasteUren} uur</strong><br>` +
         (alleGevolgen.length ? `Gevolgen: ${[...new Set(alleGevolgen)].join(', ')}` : '');
     }
 
@@ -492,7 +521,9 @@
     }
 
     function updateGrafiek() {
-      const dataArray = Object.entries(tellingen).sort((a,b) => b[1]-a[1]).slice(0,5);
+      const dataArray = Object.entries(tellingen)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5);
       const labels = dataArray.map(item => item[0]);
       const data = dataArray.map(item => item[1]);
 
