@@ -26,11 +26,11 @@
     }
     main {
       max-width: 800px;
-      margin: 2em auto;
       padding: 2em;
       background: white;
       border-radius: 8px;
       box-shadow: 0 0 15px rgba(0,0,0,0.07);
+      border: 3px solid #ffa726;
     }
     label {
       display: block;
@@ -75,37 +75,62 @@
     <img src="mango.png" alt="MangroRP Logo" />
     <h1>MangoRP Straffen</h1>
   </header>
-  <main>
-    <label for="artikel">Kies artikel:</label>
-    <select id="artikel"></select>
 
-    <label for="keer">Kies keer:</label>
-    <select id="keer">
-      <option value="1">1e keer</option>
-      <option value="2">2e keer</option>
-      <option value="3">3e keer</option>
-      <option value="4">4e keer</option>
-      <option value="5">5e keer</option>
-      <option value="6">6e keer</option>
-    </select>
+  <div style="display: flex; flex-wrap: wrap; gap: 2em; justify-content: center; align-items: flex-start; padding: 2em;">
+    <main style="flex: 1 1 500px;">
+      <label for="artikel">Kies artikel:</label>
+      <select id="artikel"></select>
 
-    <label>
-      <input type="checkbox" id="starterCheckbox" onchange="updateTotaal()"> Minder dan 24 uur speeltijd (verdubbelt straf)
-    </label>
+      <label for="keer">Kies keer:</label>
+      <select id="keer">
+        <option value="1">1e keer</option>
+        <option value="2">2e keer</option>
+        <option value="3">3e keer</option>
+        <option value="4">4e keer</option>
+        <option value="5">5e keer</option>
+        <option value="6">6e keer</option>
+      </select>
 
-    <button onclick="voegToe()">Voeg toe</button>
+      <label>
+        <input type="checkbox" id="starterCheckbox" onchange="updateTotaal()"> Minder dan 24 uur speeltijd (verdubbelt straf)
+      </label>
 
-    <div id="lijst" class="resultaat"></div>
-    <div id="totaal" class="resultaat"></div>
+      <button onclick="voegToe()">Voeg toe</button>
 
-    <div class="resultaat">
-      <label for="samenvatting">TX Samenvatting:</label>
-      <textarea id="samenvatting" rows="4" style="width: 100%; resize: vertical;"></textarea>
-    </div>
-  </main>
+      <div id="lijst" class="resultaat"></div>
+      <div id="totaal" class="resultaat"></div>
+
+      <div class="resultaat">
+        <label for="samenvatting">TX Samenvatting:</label>
+        <textarea id="samenvatting" rows="4" style="width: 100%; resize: vertical;"></textarea>
+      </div>
+    </main>
+
+    <aside style="flex: 1 1 300px; background: #fff8ef; border: 2px solid #ffa726; border-radius: 8px; padding: 1em; box-shadow: 0 0 8px rgba(0,0,0,0.05);">
+      <h2 style="margin-top: 0;">📚 Extra informatie</h2>
+
+      <h3 style="margin-bottom: 0.3em;">Artikel O.8 – Overmeesteren</h3>
+      <p>Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn. De gehostagede telt niet mee.</p>
+      <ul style="padding-left: 1em;">
+        <li>1 vs 2 → ❌ niet genoeg</li>
+        <li>1 vs 3 → ✅ overmeesteren mag</li>
+      </ul>
+      <p>Alle personen moeten zichtbaar zijn. “We hadden 5 man verderop” is <strong>ongeldig</strong>. Deze regel geldt voor overheid én criminelen.</p>
+
+      <h3 style="margin-bottom: 0.3em;">Artikel O.12 – Wraakacties</h3>
+      <p>
+        Je mag wraak nemen op iemand die jou of een vriend onrecht heeft aangedaan, <strong>binnen 24 uur</strong> en <em>alleen in RP</em>. Alleen de dader mag worden aangepakt.
+      </p>
+      <ul style="padding-left: 1em;">
+        <li>Geen doodschot als iemand niet komt opdagen</li>
+        <li>Wel vastbinden/meenemen om info te krijgen</li>
+        <li><strong>Zeg altijd waarom vóór het schieten</strong></li>
+      </ul>
+    </aside>
+  </div>
 
   <script>
-    // ➤ Zet hier je straffenlijst terug
+    // ➤ Plak hier je straffen terug
     const straffen = [ { id: 1, artikel: 'Artikel 1.1  VDM', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 1, artikel: 'Artikel 1.1 VDM', keer: 2, uren: 12, gevolg: '' },
   { id: 2, artikel: 'Artikel 1.2 RDM', keer: 1, uren: 2, gevolg: 'warn' },
@@ -261,6 +286,12 @@
 { id: 38, artikel: 'Artikel 26. Bedreigingen', keer: 3, uren: 168, gevolg: '' },
 { id: 38, artikel: 'Artikel 26. Bedreigingen', keer: 4, uren: 336, gevolg: '' },
 
+{ id: 62, artikel: 'Artikel 27. Liegen in een staffzaak/tegen stafflid', keer: 1, uren: 24, gevolg: '1 dag ban' },
+{ id: 62, artikel: 'Artikel 27. Liegen in een staffzaak/tegen stafflid', keer: 2, uren: 48, gevolg: '2 dagen ban' },
+{ id: 62, artikel: 'Artikel 27. Liegen in een staffzaak/tegen stafflid', keer: 3, uren: 168, gevolg: '1 week ban' },
+{ id: 62, artikel: 'Artikel 27. Liegen in een staffzaak/tegen stafflid', keer: 4, uren: 336, gevolg: '2 weken ban' },
+{ id: 62, artikel: 'Artikel 27. Liegen in een staffzaak/tegen stafflid', keer: 5, uren: 0, gevolg: 'Permanent verbannen (unban mogelijk na 1 maand)' },
+
 { id: 39, artikel: 'Artikel 28. Negative content', keer: 1, uren: 12, gevolg: 'Ban tot video offline' },
 { id: 39, artikel: 'Artikel 28. Negative content', keer: 2, uren: 24, gevolg: 'Ban tot video offline' },
 { id: 39, artikel: 'Artikel 28. Negative content', keer: 3, uren: 168, gevolg: 'Ban tot video offline' },
@@ -395,7 +426,7 @@
 
       if (match) {
         const p = document.createElement('p');
-        p.innerHTML = `<strong>${match.artikel}</strong> – ${match.uren} uur` +
+        p.innerHTML = `<strong>${match.artikel}</strong> – ${match.uren} uur` + 
           (match.gevolg ? ` – ${match.gevolg}` : '');
         lijstDiv.appendChild(p);
 
