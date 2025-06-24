@@ -7,18 +7,19 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fff7f0;
-      color: #333;
       margin: 0;
       padding: 0;
+      background: url('https://i.imgur.com/nbpTId4.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
     }
     header {
-      background-color: #ff8c00;
+      background-color: rgba(255,140,0,0.85);
       color: white;
       padding: 1em;
       display: flex;
       align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     header img {
       height: 40px;
@@ -29,25 +30,25 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
-      padding: 2em;
       gap: 2em;
+      padding: 2em;
     }
     main {
       flex: 1 1 550px;
       padding: 2em;
-      background: white;
+      background: rgba(255,255,255,0.95);
       border-radius: 8px;
       border: 3px solid #ffa726;
-      box-shadow: 0 0 15px rgba(0,0,0,0.07);
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
       max-width: 800px;
     }
     aside {
       flex: 0 0 300px;
-      background: #fff8ef;
+      background: rgba(255,248,239,0.92);
       border: 2px solid #ffa726;
       border-radius: 8px;
       padding: 1em;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      box-shadow: 0 0 8px rgba(0,0,0,0.07);
     }
     aside h2 {
       margin-top: 0;
@@ -67,7 +68,6 @@
       background-color: #fff8ef;
       color: #333;
       outline: none;
-      transition: all 0.2s ease;
     }
     button {
       background-color: #ffa726;
@@ -134,32 +134,27 @@
     <aside>
       <h2>📘 Missende artikelen</h2>
 
-      <h3 style="margin-bottom: 0.3em;">Artikel O.8 – Overmeesteren</h3>
-      <p>
-        Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn dan jouw partij.
-      </p>
+      <h3>Artikel O.8 – Overmeesteren</h3>
+      <p>Wanneer je iemand hostage houdt, mag de tegenpartij je alleen overmeesteren als ze met <strong>minstens 2 man meer</strong> zijn dan jouw partij.</p>
       <ul>
         <li>1 vs 2 = ❌ te weinig</li>
-        <li>1 vs 3 = ✅ overmeestering toegestaan</li>
+        <li>1 vs 3 = ✅ toegestaan</li>
       </ul>
-      <p>De gehostagede telt niet mee. Alle personen moeten zichtbaar zijn. Verborgen mannetjes tellen niet. Geldt voor overheid én criminelen.</p>
+      <p>Gehostagede telt niet mee. Alle personen moeten zichtbaar zijn. Verstopt telt niet. Geldt voor overheid én criminelen.</p>
 
-      <h3 style="margin-bottom: 0.3em;">Artikel O.12 – Wraakacties</h3>
-      <p>
-        Binnen 24 uur mag je wraak nemen op een specifieke dader die jou of een vriend iets aandeed. Alleen in RP.
-      </p>
+      <h3>Artikel O.12 – Wraakacties</h3>
+      <p>Wraak binnen 24 uur mag alleen in RP. Enkel op de dader gericht.</p>
       <ul>
-        <li>Alleen die persoon aanpakken</li>
-        <li>Je mag anderen vasthouden of ondervragen</li>
+        <li>Anderen vasthouden mag</li>
         <li>Niet zomaar neerschieten</li>
-        <li><strong>Altijd een reden geven vóór actie</strong></li>
+        <li><strong>Reden moet worden uitgesproken vóór actie</strong></li>
       </ul>
     </aside>
   </div>
 
   <script>
-    // ➤ Hier kun jij je straffen plakken
-    const straffen = [ { id: 1, artikel: 'Artikel 1.1 VDM', keer: 1, uren: 2, gevolg: 'warn' },
+    // ➤ Plak hier je straffenlijst
+     const straffen = [ { id: 1, artikel: 'Artikel 1.1 VDM', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 1, artikel: 'Artikel 1.1 VDM', keer: 2, uren: 12, gevolg: '' },
   { id: 2, artikel: 'Artikel 1.2 RDM', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 2, artikel: 'Artikel 1.2 RDM', keer: 2, uren: 12, gevolg: '' },
