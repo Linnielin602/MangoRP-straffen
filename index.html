@@ -37,7 +37,7 @@
       margin: 1em 0 0.25em;
       font-weight: 600;
     }
-    select, button {
+    select, input[type="checkbox"], button {
       padding: 0.6em 1em;
       font-size: 1em;
       border: 2px solid #ffb84d;
@@ -89,6 +89,10 @@
       <option value="6">6e keer</option>
     </select>
 
+    <label>
+      <input type="checkbox" id="starterCheckbox" onchange="updateTotaal()"> Minder dan 24 uur speeltijd (verdubbelt straf)
+    </label>
+
     <button onclick="voegToe()">Voeg toe</button>
 
     <div id="lijst" class="resultaat"></div>
@@ -96,8 +100,8 @@
   </main>
 
   <script>
-    // 👉 Plak hier je straffen-array in:
- const straffen = [ { id: 1, artikel: 'Artikel 1.1  VDM 1', keer: 1, uren: 2, gevolg: 'warn' },
+    // Vul hier je volledige straffenlijst weer aan:
+const straffen = [ { id: 1, artikel: 'Artikel 1.1  VDM 1', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 1, artikel: 'Artikel 1.1  VDM 1', keer: 2, uren: 12, gevolg: '' },
   { id: 2, artikel: 'Artikel 1.2  RDM 2', keer: 1, uren: 2, gevolg: 'warn' },
   { id: 2, artikel: 'Artikel 1.2  RDM 2', keer: 2, uren: 12, gevolg: '' },
@@ -380,10 +384,8 @@
     function voegToe() {
       const gekozenArtikel = document.getElementById('artikel').value;
       const gekozenKeer = parseInt(document.getElementById('keer').value);
-
       const match = straffen.find(s => s.artikel === gekozenArtikel && s.keer === gekozenKeer);
       const lijstDiv = document.getElementById('lijst');
-      const totaalDiv = document.getElementById('totaal');
 
       if (match) {
         const p = document.createElement('p');
@@ -394,11 +396,20 @@
         totaalUren += match.uren;
         if (match.gevolg) alleGevolgen.push(match.gevolg);
 
-        totaalDiv.innerHTML = `<hr><strong>Totaal: ${totaalUren} uur</strong><br>` +
-          (alleGevolgen.length ? `Gevolgen: ${[...new Set(alleGevolgen)].join(', ')}` : '');
+        updateTotaal();
       } else {
         alert('Geen straf gevonden voor deze combinatie.');
       }
+    }
+
+    function updateTotaal() {
+      const totaalDiv = document.getElementById('totaal');
+      const checkbox = document.getElementById('starterCheckbox');
+      const multiplier = checkbox.checked ? 2 : 1;
+      const aangepasteUren = totaalUren * multiplier;
+
+      totaalDiv.innerHTML = `<hr><strong>Totaal: ${aangepasteUren} uur</strong><br>` +
+        (alleGevolgen.length ? `Gevolgen: ${[...new Set(alleGevolgen)].join(', ')}` : '');
     }
   </script>
 </body>
