@@ -9,8 +9,9 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: url('https://wallpapercave.com/wp/wp5561199.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background: url('mangocity.jpg') no-repeat center top fixed;
+      background-size: contain;
+      background-color: #000;
       color: #333;
     }
     header {
@@ -140,7 +141,7 @@
         <li>1 vs 2 = ❌ te weinig</li>
         <li>1 vs 3 = ✅ toegestaan</li>
       </ul>
-      <p>De gehostagede telt niet mee. Alle personen moeten zichtbaar zijn. Verstopt telt niet. Geldt voor overheid én criminelen.</p>
+      <p>De gehostagede telt niet mee. Iedereen moet zichtbaar zijn. Verstopt telt niet. Geldt voor overheid én criminelen.</p>
 
       <h3>Artikel O.12 – Wraakacties</h3>
       <p>Wraak binnen 24 uur mag alleen in RP. Enkel op de dader gericht.</p>
@@ -427,6 +428,7 @@
 { id: 61, artikel: 'Artikel OH.3 Corruptie overheid', keer: 1, uren: 720, gevolg: '1 t/m 6 maanden ban + ontslag + Blacklist' }
 
 ];
+
     const artikelSelect = document.getElementById('artikel');
     const uniekeArtikelen = [...new Set(straffen.map(s => s.artikel))];
     uniekeArtikelen.forEach(art => {
